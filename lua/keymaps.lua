@@ -1,5 +1,3 @@
-local vim = vim
-
 function Keymap(mode, key, cmd)
 	vim.api.nvim_set_keymap(mode, key, cmd, { silent = true, noremap = true })
 end
