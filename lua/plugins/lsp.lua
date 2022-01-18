@@ -31,7 +31,7 @@ local function lsp_keymap(bufnr)
 	buf_keymap("n", "<leader>cs", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 end
 
--- lsp config
+-- lsp callback
 local on_attach = function(client, bufnr)
 	if client.name == "gopls" then
 		client.resolved_capabilities.document_formatting = false
@@ -79,3 +79,17 @@ for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+
+-- lsp config
+local lspconfig = require("lspconfig")
+lspconfig.pyright.setup({
+	settings = {
+		python = {
+			analysis = {
+				typeCheckingMode = "basic",
+				autoSearchPaths = true,
+				useLibraryCodeForTypes = true,
+			},
+		},
+	},
+})

@@ -13,7 +13,8 @@ local Plug = vim.fn["plug#"]
 
 vim.call("plug#begin", "~/.config/nvim/plugins")
 
-Plug("shaunsingh/nord.nvim")
+-- Plug("shaunsingh/nord.nvim")
+Plug("rebelot/kanagawa.nvim")
 Plug("goolord/alpha-nvim")
 
 Plug("tpope/vim-surround")
@@ -30,6 +31,7 @@ Plug("norcalli/nvim-colorizer.lua")
 Plug("github/copilot.vim")
 Plug("lewis6991/gitsigns.nvim")
 Plug("andrewstuart/vim-kubernetes")
+Plug("fladson/vim-kitty")
 Plug("cespare/vim-toml")
 Plug("vim-test/vim-test")
 Plug("rcarriga/vim-ultest", { ["do"] = ":UpdateRemotePlugins" })
@@ -73,11 +75,12 @@ Plug("hrsh7th/vim-vsnip")
 
 vim.call("plug#end")
 
--- nord
-vim.g.nord_enable_sidebar_background = false
-vim.g.nord_contrast = true
-vim.g.nord_disable_background = false
-vim.cmd([[ silent! colorscheme nord ]])
+-- colorscheme
+-- vim.g.nord_enable_sidebar_background = false
+-- vim.g.nord_contrast = true
+-- vim.g.nord_disable_background = false
+require("kanagawa").setup({})
+vim.cmd([[ silent! colorscheme kanagawa ]])
 
 -- vim-commentary
 Keymap("n", "<leader>/", ":Commentary<CR>")

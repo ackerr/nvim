@@ -11,11 +11,15 @@ dashboard.section.header.opts.hl = pick_color()
 
 dashboard.section.buttons.val = {
 	dashboard.button("e", "  > New file", ":ene <BAR> startinsert <CR>"),
-	dashboard.button("<Leader> ff", "  > Find file"),
-	dashboard.button("<Leader> fr", "  > Find word"),
-	dashboard.button("<Leader>  p", "  > Find project"),
-	dashboard.button("<Leader> rr", "  > Recent", ":Telescope oldfiles<CR>"),
-	dashboard.button("<Leader> ev", "  > Settings"),
+	dashboard.button("f", "  > Find file", ":Telescope find_files<CR>"),
+	dashboard.button("w", "  > Find word", ":Telescope live_grep<CR>"),
+	dashboard.button(
+		"p",
+		"  > Find project",
+		":lua require'telescope'.extensions.project.project{ display_type = 'full' }<CR>"
+	),
+	dashboard.button("r", "  > Find recent", ":Telescope oldfiles<CR>"),
+	dashboard.button("s", "  > Settings", ":e $MYVIMRC<CR>"),
 	dashboard.button("q", "  > Quit", ":qa<CR>"),
 }
 
