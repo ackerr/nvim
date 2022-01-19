@@ -73,6 +73,8 @@ Plug("rafamadriz/friendly-snippets")
 Plug("hrsh7th/cmp-vsnip")
 Plug("hrsh7th/vim-vsnip")
 
+Plug("famiu/nvim-reload")
+
 vim.call("plug#end")
 
 -- colorscheme
@@ -130,3 +132,6 @@ vim.g["ultest_use_pty"] = 1
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
 vim.g.copilot_tab_fallback = ""
+
+-- nvim-reload
+Keymap("n", "<leader>sv", ":Reload<CR>")

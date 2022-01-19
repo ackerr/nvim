@@ -4,7 +4,6 @@ end
 
 Keymap("i", "jk", "<Esc>")
 Keymap("n", "<leader>ev", ":edit $MYVIMRC<CR>")
-Keymap("n", "<leader>sv", ":source $MYVIMRC<CR>")
 Keymap("n", "<c-y>", "viwy")
 
 -- " register
