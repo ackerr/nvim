@@ -13,7 +13,7 @@ local Plug = vim.fn["plug#"]
 
 vim.call("plug#begin", "~/.config/nvim/plugins")
 
--- Plug("shaunsingh/nord.nvim")
+Plug("shaunsingh/nord.nvim")
 Plug("rebelot/kanagawa.nvim")
 Plug("goolord/alpha-nvim")
 

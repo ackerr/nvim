@@ -62,7 +62,7 @@ vim.diagnostic.config({
 	virtual_text = false,
 	signs = true,
 	underline = true,
-	update_in_insert = true,
+	update_in_insert = false,
 	severity_sort = false,
 	float = {
 		focusable = false,
@@ -77,7 +77,7 @@ vim.diagnostic.config({
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
 -- lsp config
@@ -86,9 +86,7 @@ lspconfig.pyright.setup({
 	settings = {
 		python = {
 			analysis = {
-				typeCheckingMode = "basic",
-				autoSearchPaths = true,
-				useLibraryCodeForTypes = true,
+				typeCheckingMode = "off",
 			},
 		},
 	},

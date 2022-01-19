@@ -7,7 +7,7 @@ require("null-ls").setup({
 		formatting.goimports,
 		formatting.black.with({ extra_args = { "--line-length", "120" } }),
 
-		diagnostics.flake8,
+		diagnostics.flake8.with({ extra_args = { "--max-line-length", "120" } }),
 		diagnostics.golangci_lint,
 	},
 })
