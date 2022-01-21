@@ -82,7 +82,10 @@ vim.call("plug#end")
 -- vim.g.nord_contrast = true
 -- vim.g.nord_disable_background = false
 require("kanagawa").setup({})
-vim.cmd([[ silent! colorscheme kanagawa ]])
+vim.cmd([[
+  silent! colorscheme kanagawa
+  highlight VertSplit guibg=None
+]])
 
 -- vim-commentary
 Keymap("n", "<leader>/", ":Commentary<CR>")
