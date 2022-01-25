@@ -3,6 +3,7 @@ local formatting = require("null-ls").builtins.formatting
 local diagnostics = require("null-ls").builtins.diagnostics
 require("null-ls").setup({
 	sources = {
+		formatting.trim_whitespace,
 		formatting.stylua,
 		formatting.goimports,
 		formatting.black.with({ extra_args = { "--line-length", "120" } }),

@@ -46,6 +46,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 local lsp_installer = require("nvim-lsp-installer")
 
+-- lsp config
 lsp_installer.on_server_ready(function(server)
 	local opts = {
 		capabilities = capabilities,
@@ -54,6 +55,17 @@ lsp_installer.on_server_ready(function(server)
 			debounce_text_changes = 150,
 		},
 	}
+	if server.name == "pyright" then
+		opts.settings = {
+			python = {
+				analysis = {
+					typeCheckingMode = "off",
+					autoSearchPaths = true,
+					useLibraryCodeForTypes = true,
+				},
+			},
+		}
+	end
 	server:setup(opts)
 end)
 
@@ -79,15 +91,3 @@ for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
-
--- lsp config
-local lspconfig = require("lspconfig")
-lspconfig.pyright.setup({
-	settings = {
-		python = {
-			analysis = {
-				typeCheckingMode = "off",
-			},
-		},
-	},
-})
