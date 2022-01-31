@@ -18,3 +18,5 @@ require("gitsigns").setup({
 })
 Keymap("n", "<leader>gs", ":Gitsigns preview_hunk<CR>")
 Keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>")
+Keymap("n", "]c", ":Gitsigns next_hunk<CR>")
+Keymap("n", "[c", ":Gitsigns prev_hunk<CR>")

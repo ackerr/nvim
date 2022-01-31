@@ -17,14 +17,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	vim.cmd([[packadd packer.nvim]])
 end
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
-
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
 	return
@@ -39,12 +31,22 @@ packer.startup({
 		use("kyazdani42/nvim-web-devicons")
 		-- colorscheme
 		use("shaunsingh/nord.nvim")
-		use("rebelot/kanagawa.nvim")
+		use({
+			"rebelot/kanagawa.nvim",
+			config = function()
+				require("kanagawa").setup()
+			end,
+		})
 		use({ "goolord/alpha-nvim", requires = { "nvim-telescope/telescope.nvim" } })
 
 		use("tpope/vim-surround")
 		use("tpope/vim-repeat")
-		use("tpope/vim-commentary")
+		use({
+			"numToStr/Comment.nvim",
+			config = function()
+				require("Comment").setup()
+			end,
+		})
 		use("itchyny/vim-cursorword")
 		use("junegunn/vim-easy-align")
 		use("editorconfig/editorconfig-vim")
@@ -118,15 +120,14 @@ end
 -- vim.g.nord_enable_sidebar_background = false
 -- vim.g.nord_contrast = true
 -- vim.g.nord_disable_background = false
-require("kanagawa").setup({})
 vim.cmd([[
   silent! colorscheme kanagawa
   highlight VertSplit guibg=NONE
 ]])
 
--- vim-commentary
-Keymap("n", "<leader>/", ":Commentary<CR>")
-Keymap("v", "<leader>/", ":Commentary<CR>")
+-- comment.nvim
+Keymap("n", "<C-_>", "gcc", { noremap = false })
+Keymap("v", "<C-_>", "gc", { noremap = false })
 
 -- vim-easy-align
 Keymap("x", "ga", ":EasyAlign<CR>")
@@ -150,10 +151,6 @@ vim.g.easy_align_delimiters = {
 -- vim-translator
 Keymap("n", "<M-t>", ":TranslateW<CR>")
 Keymap("v", "<M-t>", ":TranslateW<CR>")
-
--- splitjoin
-Keymap("n", "sj", ":SplitjoinSplit<CR>")
-Keymap("n", "sk", ":SplitjoinJoin<CR>")
 
 -- vim-test and vim-ultest
 Keymap("n", "tn", ":TestNearest<CR>")

@@ -1,5 +1,6 @@
-function Keymap(mode, key, cmd)
-	vim.api.nvim_set_keymap(mode, key, cmd, { silent = true, noremap = true })
+function Keymap(mode, key, cmd, options)
+	options = options or { silent = true, noremap = true }
+	vim.api.nvim_set_keymap(mode, key, cmd, options)
 end
 
 Keymap("i", "jk", "<Esc>")
