@@ -14,6 +14,10 @@ local function lsp_document_highlight(client)
 	end
 end
 
+local function lsp_symbols(client, bufnr)
+	require("aerial").on_attach(client, bufnr)
+end
+
 local function lsp_keymap(bufnr)
 	local function buf_keymap(mode, key, cmd)
 		vim.api.nvim_buf_set_keymap(bufnr, mode, key, cmd, { noremap = true, silent = true })
@@ -28,17 +32,17 @@ local function lsp_keymap(bufnr)
 	buf_keymap("n", "<m-k>", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 	buf_keymap("n", "<m-j>", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 	buf_keymap("n", "<leader>d", "<cmd>lua vim.diagnostic.disable()<CR>")
-	buf_keymap("n", "<leader>cs", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 end
 
 -- lsp callback
 local on_attach = function(client, bufnr)
-	if client.name == "gopls" then
+	if client.name == "gopls" or client.name == "rust_analyzer" then
 		client.resolved_capabilities.document_formatting = false
 	end
 
 	lsp_keymap(bufnr)
 	lsp_document_highlight(client)
+	lsp_symbols(client, bufnr)
 end
 
 -- lsp installer

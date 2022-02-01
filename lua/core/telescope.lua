@@ -24,6 +24,7 @@ Keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>")
 Keymap("n", "<leader>fg", "<cmd>Telescope git_status<CR>")
 Keymap("n", "<leader>rr", "<cmd>Telescope oldfiles<CR>")
 Keymap("n", "gr", "<cmd>Telescope lsp_references theme=dropdown<CR>")
+Keymap("n", "<M-CR>", "<cmd>Telescope lsp_code_actions theme=dropdown<CR><ESC>") -- alt+enter
 
 -- telescope-project
 telescope.load_extension("project")

@@ -87,6 +87,7 @@ packer.startup({
 		use("hrsh7th/cmp-cmdline")
 		use("hrsh7th/nvim-cmp")
 		use("windwp/nvim-autopairs")
+		use("stevearc/aerial.nvim")
 		-- lsp icon
 		use("onsails/lspkind-nvim")
 		-- snippet.
