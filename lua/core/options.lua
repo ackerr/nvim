@@ -3,6 +3,7 @@ local opt = vim.opt
 
 vim.g.mapleader = " "
 
+opt.cursorline = true
 opt.backspace = "2"
 opt.updatetime = 500
 opt.signcolumn = "yes"

@@ -1,6 +1,7 @@
 require("core.options")
 require("core.keymaps")
 require("core.provider")
+require("core.filetype")
 require("core.plugins")
 require("core.lsp")
 require("core.completion")
