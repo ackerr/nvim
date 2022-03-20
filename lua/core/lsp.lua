@@ -14,10 +14,6 @@ local function lsp_document_highlight(client)
 	end
 end
 
-local function lsp_symbols(client, bufnr)
-	require("aerial").on_attach(client, bufnr)
-end
-
 local function lsp_keymap(bufnr)
 	local function buf_keymap(mode, key, cmd)
 		vim.api.nvim_buf_set_keymap(bufnr, mode, key, cmd, { noremap = true, silent = true })
@@ -36,13 +32,12 @@ end
 
 -- lsp callback
 local on_attach = function(client, bufnr)
-	if client.name == "gopls" or client.name == "rust_analyzer" then
+	if client.name == "gopls" or client.name == "rust_analyzer" or client.name == "sumneko_lua" then
 		client.resolved_capabilities.document_formatting = false
 	end
 
 	lsp_keymap(bufnr)
 	lsp_document_highlight(client)
-	lsp_symbols(client, bufnr)
 end
 
 -- lsp installer

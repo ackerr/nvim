@@ -10,7 +10,7 @@ require("null-ls").setup({
 		formatting.black.with({ extra_args = { "--line-length", "120" } }),
 
 		diagnostics.flake8.with({ extra_args = { "--max-line-length", "120" } }),
-		diagnostics.golangci_lint,
+		-- diagnostics.golangci_lint,
 	},
 })
 vim.cmd([[ command! Formatting exec 'lua vim.lsp.buf.formatting()' ]])
