@@ -38,7 +38,7 @@ packer.startup({
 			end,
 		})
 		use({ "goolord/alpha-nvim", requires = { "nvim-telescope/telescope.nvim" } })
-
+		use("kevinhwang91/nvim-hlslens")
 		use("tpope/vim-surround")
 		use("tpope/vim-repeat")
 		use({
@@ -116,10 +116,6 @@ if packer_bootstarp then
 	require("packer").sync()
 end
 
--- colorscheme
--- vim.g.nord_enable_sidebar_background = false
--- vim.g.nord_contrast = true
--- vim.g.nord_disable_background = false
 vim.cmd([[
   silent! colorscheme kanagawa
   highlight VertSplit guibg=NONE
@@ -169,3 +165,21 @@ vim.g["ultest_use_pty"] = 1
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
 vim.g.copilot_tab_fallback = ""
+
+-- hlslens
+require("hlslens").setup({
+	nearest_only = true,
+})
+
+Keymap("n", "n", [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]])
+Keymap("n", "N", [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]])
+Keymap("n", "*", [[*<Cmd>lua require('hlslens').start()<CR>]])
+Keymap("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>]])
+
+vim.cmd([[
+    aug VMlens
+        au!
+        au User visual_multi_start lua require('vmlens').start()
+        au User visual_multi_exit lua require('vmlens').exit()
+    aug END
+]])

@@ -20,8 +20,8 @@ require("nvim-tree").setup({
 		dotfiles = false,
 		custom = { ".git", "node_modules", ".cache", ".DS_Store", "__pycache__", ".idea", ".dist" },
 	},
+	ignore_ft_on_setup = { "alpha" },
 })
 
 Keymap("n", "<leader>n", ":NvimTreeToggle<CR>")
 Keymap("n", "<leader>m", ":NvimTreeFindFile<CR>")
-
