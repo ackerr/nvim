@@ -97,6 +97,7 @@ packer.startup({
 		use({ "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" } })
 		-- syntax
 		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+		use({ "romgrk/nvim-treesitter-context", requires = { "nvim-treesitter/nvim-treesitter" } })
 		use({ "SmiteshP/nvim-gps", requires = { "neovim/nvim-lspconfig" } })
 		-- search
 		use("nvim-telescope/telescope.nvim")

@@ -1,7 +1,7 @@
 -- nvim-treesitter
 require("colorizer").setup({ "*" })
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "go", "lua", "python", "vim" },
+	ensure_installed = { "go", "lua", "python", "vim", "rust" },
 	highlight = {
 		enable = true,
 		disable = {},
@@ -9,4 +9,8 @@ require("nvim-treesitter.configs").setup({
 	indent = {
 		enable = false,
 	},
+})
+
+require("treesitter-context").setup({
+	enable = true,
 })

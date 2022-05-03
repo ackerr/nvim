@@ -40,33 +40,48 @@ local on_attach = function(client, bufnr)
 	lsp_document_highlight(client)
 end
 
--- lsp installer
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
-local lsp_installer = require("nvim-lsp-installer")
+-- lsp installer
+
+local servers = { "gopls", "rust_analyzer", "sumneko_lua", "pyright", "vimls", "jsonls", "tsserver" }
+require("nvim-lsp-installer").setup({
+	ensure_installed = servers, 
+	automatic_installation = true,
+	ui = {
+		icons = {
+			server_installed = "✓",
+			server_pending = "➜",
+			server_uninstalled = "✗",
+		},
+	},
+})
+
 
 -- lsp config
-lsp_installer.on_server_ready(function(server)
-	local opts = {
-		capabilities = capabilities,
-		on_attach = on_attach,
-		flags = {
-			debounce_text_changes = 150,
-		},
-	}
-	if server.name == "pyright" then
-		opts.settings = {
-			python = {
-				analysis = {
-					typeCheckingMode = "off",
-					autoSearchPaths = true,
-					useLibraryCodeForTypes = true,
-				},
+local lspconfig = require("lspconfig")
+
+for _, server in ipairs(servers) do
+  lspconfig[server].setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    },
+  })
+end
+
+lspconfig.pyright.setup({
+	settings = {
+		python = {
+			analysis = {
+				typeCheckingMode = "off",
+				autoSearchPaths = true,
+				useLibraryCodeForTypes = true,
 			},
-		}
-	end
-	server:setup(opts)
-end)
+		},
+	},
+})
 
 -- lsp diagnostic
 vim.diagnostic.config({

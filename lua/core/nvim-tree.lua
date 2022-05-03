@@ -5,9 +5,8 @@ vim.g.nvim_tree_icons = {
 	symlink = "",
 }
 require("nvim-tree").setup({
-	auto_close = true,
 	update_cwd = true,
-	update_forcused_file = {
+	update_focused_file = {
 		enable = true,
 		update_cwd = true,
 	},
@@ -21,6 +20,11 @@ require("nvim-tree").setup({
 		custom = { ".git", "node_modules", ".cache", ".DS_Store", "__pycache__", ".idea", ".dist" },
 	},
 	ignore_ft_on_setup = { "alpha" },
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
+	nested = true,
 })
 
 Keymap("n", "<leader>n", ":NvimTreeToggle<CR>")
