@@ -46,7 +46,7 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 local servers = { "gopls", "rust_analyzer", "sumneko_lua", "pyright", "vimls", "jsonls", "tsserver" }
 require("nvim-lsp-installer").setup({
-	ensure_installed = servers, 
+	ensure_installed = servers,
 	automatic_installation = true,
 	ui = {
 		icons = {
@@ -57,18 +57,17 @@ require("nvim-lsp-installer").setup({
 	},
 })
 
-
 -- lsp config
 local lspconfig = require("lspconfig")
 
 for _, server in ipairs(servers) do
-  lspconfig[server].setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    },
-  })
+	lspconfig[server].setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		flags = {
+			debounce_text_changes = 150,
+		},
+	})
 end
 
 lspconfig.pyright.setup({

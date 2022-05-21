@@ -34,3 +34,5 @@ opt.foldlevel = 99
 opt.showmode = false
 opt.background = "dark"
 opt.termguicolors = true
+
+vim.api.nvim_create_autocmd({ "FileType" }, {command = "set formatoptions-=ro"})

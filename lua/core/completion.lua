@@ -3,10 +3,25 @@ local vim = vim
 -- nvim-cmp.
 local cmp = require("cmp")
 local lspkind = require("lspkind")
+local luasnip = require("luasnip")
+
+require("luasnip/loaders/from_vscode").lazy_load()
 cmp.setup({
 	formatting = {
-		fields = { "kind", "abbr" },
-		format = lspkind.cmp_format({ with_text = false, maxwidth = 50 }),
+		fields = { "kind", "abbr", "menu" },
+		format = lspkind.cmp_format({
+			with_text = false,
+			maxwidth = 50,
+			before = function(entry, vim_item)
+				vim_item.menu = ({
+					nvim_lsp = "[LSP]",
+					luasnip = "[Snippet]",
+					buffer = "[Buffer]",
+					path = "[Path]",
+				})[entry.source.name]
+				return vim_item
+			end,
+		}),
 	},
 	mapping = {
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
@@ -18,6 +33,10 @@ cmp.setup({
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
+			elseif luasnip.expandable() then
+				luasnip.expand()
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
 			else
 				local copilot_keys = vim.fn["copilot#Accept"]()
 				if copilot_keys ~= "" then
@@ -37,18 +56,27 @@ cmp.setup({
 	},
 	snippet = {
 		expand = function(args)
-			vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+			require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
 		end,
 	},
 	sources = {
 		{ name = "nvim_lsp" },
-		{ name = "vsnip" },
+		{ name = "luasnip" },
 		{ name = "buffer" },
 		{ name = "path" },
 	},
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
 		select = false,
+	},
+	window = {
+		documentation = {
+			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+		},
+	},
+	experimental = {
+		ghost_text = false,
+		native_menu = false,
 	},
 })
 
@@ -61,6 +89,7 @@ cmp.setup.cmdline("/", {
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = "path" },
 	}, {

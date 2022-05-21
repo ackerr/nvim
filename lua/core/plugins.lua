@@ -73,9 +73,10 @@ packer.startup({
 		use({ "voldikss/vim-translator", cmd = { "TranslateW" } })
 		-- terminal
 		use("voldikss/vim-floaterm")
+		use({ "akinsho/toggleterm.nvim", tag = "v1.*" })
 
 		use("kyazdani42/nvim-tree.lua")
-		use("akinsho/bufferline.nvim")
+		use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
 		use("nvim-lualine/lualine.nvim")
 		-- lsp
 		use("neovim/nvim-lspconfig")
@@ -91,14 +92,17 @@ packer.startup({
 		use("onsails/lspkind-nvim")
 		-- snippet.
 		use("rafamadriz/friendly-snippets")
-		use("hrsh7th/cmp-vsnip")
-		use("hrsh7th/vim-vsnip")
+		use("L3MON4D3/LuaSnip")
+		use("saadparwaiz1/cmp_luasnip")
 		-- lsp format
 		use({ "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" } })
 		-- syntax
 		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+		use({ "nvim-treesitter/nvim-treesitter-textobjects", requires = { "nvim-treesitter/nvim-treesitter" } })
+		-- use({ "RRethy/nvim-treesitter-textsubobjects", requires = { "nvim-treesitter/nvim-treesitter" } })
 		use({ "romgrk/nvim-treesitter-context", requires = { "nvim-treesitter/nvim-treesitter" } })
-		use({ "SmiteshP/nvim-gps", requires = { "neovim/nvim-lspconfig" } })
+
+		-- use({ "SmiteshP/nvim-gps", requires = { "neovim/nvim-lspconfig" } })
 		-- search
 		use("nvim-telescope/telescope.nvim")
 		use("nvim-telescope/telescope-project.nvim")
