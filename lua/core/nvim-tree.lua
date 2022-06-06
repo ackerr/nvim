@@ -1,9 +1,4 @@
 -- nvim-tree.lua
-vim.g.nvim_tree_respect_buf_cwd = 1
-vim.g.nvim_tree_icons = {
-	default = "",
-	symlink = "",
-}
 require("nvim-tree").setup({
 	update_cwd = true,
 	update_focused_file = {
@@ -20,6 +15,15 @@ require("nvim-tree").setup({
 		custom = { ".git", "node_modules", ".cache", ".DS_Store", "__pycache__", ".idea", ".dist" },
 	},
 	ignore_ft_on_setup = { "alpha" },
+	respect_buf_cwd = true,
+	renderer = {
+		icons = {
+			glyphs = {
+				default = "",
+				symlink = "",
+			},
+		},
+	},
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {
