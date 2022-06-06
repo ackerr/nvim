@@ -2,6 +2,8 @@
 local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
 
+math.randomseed(os.time())
+
 local function pick_color()
 	local colors = { "String", "Identifier", "Keyword", "Number" }
 	return colors[math.random(#colors)]
@@ -18,7 +20,7 @@ dashboard.section.buttons.val = {
 		"  > Find project",
 		":lua require'telescope'.extensions.project.project{ display_type = 'full' }<CR>"
 	),
-	dashboard.button("r", "  > Find recent", ":Telescope oldfiles<CR>"),
+	dashboard.button("r", "  > Find recent", ":Telescope oldfiles<CR>"),
 	dashboard.button("s", "  > Settings", ":e $MYVIMRC<CR>"),
 	dashboard.button("q", "  > Quit", ":qa<CR>"),
 }

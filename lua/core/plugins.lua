@@ -30,7 +30,6 @@ packer.startup({
 		use("nvim-lua/plenary.nvim")
 		use("kyazdani42/nvim-web-devicons")
 		-- colorscheme
-		use("shaunsingh/nord.nvim")
 		use({
 			"rebelot/kanagawa.nvim",
 			config = function()
@@ -38,71 +37,92 @@ packer.startup({
 			end,
 		})
 		use({ "goolord/alpha-nvim", requires = { "nvim-telescope/telescope.nvim" } })
-		use("kevinhwang91/nvim-hlslens")
-		use("tpope/vim-surround")
-		use("tpope/vim-repeat")
+		use({ "kevinhwang91/nvim-hlslens" })
+		use({ "tpope/vim-surround", opt = true })
+		use({ "tpope/vim-repeat", opt = true })
 		use({
 			"numToStr/Comment.nvim",
 			config = function()
 				require("Comment").setup()
 			end,
 		})
-		use("itchyny/vim-cursorword")
-		use("junegunn/vim-easy-align")
-		use("editorconfig/editorconfig-vim")
-		use("terryma/vim-multiple-cursors")
-		use("mg979/vim-visual-multi")
+		use({ "itchyny/vim-cursorword", opt = true })
+		use({ "junegunn/vim-easy-align", opt = true })
+		use({ "editorconfig/editorconfig-vim" })
+		use({ "terryma/vim-multiple-cursors", opt = true })
+		use({ "mg979/vim-visual-multi", opt = true })
 		use({ "Vimjas/vim-python-pep8-indent", ft = "python" })
-		use("norcalli/nvim-colorizer.lua")
+		use({
+			"norcalli/nvim-colorizer.lua",
+			config = function()
+				require("colorizer").setup({ "*" })
+			end,
+		})
 
-		use("github/copilot.vim")
-		use("lewis6991/gitsigns.nvim")
+		use({ "github/copilot.vim", opt = true })
+		use({
+			"lewis6991/gitsigns.nvim",
+			event = "BufRead",
+			config = function()
+				require("core.gitsigns")
+			end,
+		})
 		use({ "andrewstuart/vim-kubernetes", ft = { "yaml", "yml" } })
 		use({ "cespare/vim-toml", ft = "toml" })
-		use({ "vim-test/vim-test", cmd = { "TestNearest", "TestSuite", "TestVisit", "TestFile", "TestLast" } })
+		use({
+			"vim-test/vim-test",
+			cmd = { "TestNearest", "TestSuite", "TestVisit", "TestFile", "TestLast" },
+			opt = true,
+		})
 		use({
 			"rcarriga/vim-ultest",
 			cmd = { "UltestSummary", "ultest" },
 			requires = { "vim-test/vim-test" },
 			run = ":UpdateRemoteuseins",
+			opt = true,
 		})
 
-		use("romainl/vim-cool")
-		use("psliwka/vim-smoothie")
-		use("wakatime/vim-wakatime")
-		use({ "voldikss/vim-translator", cmd = { "TranslateW" } })
+		use({ "romainl/vim-cool" })
+		use({ "psliwka/vim-smoothie", opt = true })
+		use({ "wakatime/vim-wakatime" })
+		use({ "voldikss/vim-translator", cmd = { "TranslateW" }, opt = true })
 		-- terminal
-		use("voldikss/vim-floaterm")
+		use({ "voldikss/vim-floaterm" })
 		use({ "akinsho/toggleterm.nvim", tag = "v1.*" })
 
-		use("kyazdani42/nvim-tree.lua")
+		use({ "kyazdani42/nvim-tree.lua" })
+
 		use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
 		use("nvim-lualine/lualine.nvim")
 		-- lsp
 		use("neovim/nvim-lspconfig")
 		use("williamboman/nvim-lsp-installer")
 
-		use("hrsh7th/cmp-nvim-lsp")
-		use("hrsh7th/cmp-buffer")
-		use("hrsh7th/cmp-path")
-		use("hrsh7th/cmp-cmdline")
 		use("hrsh7th/nvim-cmp")
+		use("hrsh7th/cmp-nvim-lsp")
+		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
+		use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
+		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" })
 		use("windwp/nvim-autopairs")
 		-- lsp icon
 		use("onsails/lspkind-nvim")
 		-- snippet.
 		use("rafamadriz/friendly-snippets")
 		use("L3MON4D3/LuaSnip")
-		use("saadparwaiz1/cmp_luasnip")
+		use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" })
 		-- lsp format
-		use({ "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" } })
+		use({
+			"jose-elias-alvarez/null-ls.nvim",
+			event = "BufRead",
+			config = function()
+				require("core.null-ls")
+			end,
+		})
 		-- syntax
 		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 		use({ "nvim-treesitter/nvim-treesitter-textobjects", requires = { "nvim-treesitter/nvim-treesitter" } })
-		-- use({ "RRethy/nvim-treesitter-textsubobjects", requires = { "nvim-treesitter/nvim-treesitter" } })
 		use({ "romgrk/nvim-treesitter-context", requires = { "nvim-treesitter/nvim-treesitter" } })
 
-		-- use({ "SmiteshP/nvim-gps", requires = { "neovim/nvim-lspconfig" } })
 		-- search
 		use("nvim-telescope/telescope.nvim")
 		use("nvim-telescope/telescope-project.nvim")
