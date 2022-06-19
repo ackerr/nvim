@@ -38,19 +38,19 @@ packer.startup({
 		})
 		use({ "goolord/alpha-nvim", requires = { "nvim-telescope/telescope.nvim" } })
 		use({ "kevinhwang91/nvim-hlslens" })
-		use({ "tpope/vim-surround", opt = true })
-		use({ "tpope/vim-repeat", opt = true })
+		use({ "tpope/vim-surround" })
+		use({ "tpope/vim-repeat" })
 		use({
 			"numToStr/Comment.nvim",
 			config = function()
 				require("Comment").setup()
 			end,
 		})
-		use({ "itchyny/vim-cursorword", opt = true })
-		use({ "junegunn/vim-easy-align", opt = true })
+		use({ "itchyny/vim-cursorword" })
+		use({ "junegunn/vim-easy-align" })
 		use({ "editorconfig/editorconfig-vim" })
-		use({ "terryma/vim-multiple-cursors", opt = true })
-		use({ "mg979/vim-visual-multi", opt = true })
+		use({ "terryma/vim-multiple-cursors" })
+		use({ "mg979/vim-visual-multi" })
 		use({ "Vimjas/vim-python-pep8-indent", ft = "python" })
 		use({
 			"norcalli/nvim-colorizer.lua",
@@ -59,7 +59,7 @@ packer.startup({
 			end,
 		})
 
-		use({ "github/copilot.vim", opt = true })
+		use({ "github/copilot.vim" })
 		use({
 			"lewis6991/gitsigns.nvim",
 			event = "BufRead",
@@ -72,20 +72,18 @@ packer.startup({
 		use({
 			"vim-test/vim-test",
 			cmd = { "TestNearest", "TestSuite", "TestVisit", "TestFile", "TestLast" },
-			opt = true,
 		})
 		use({
 			"rcarriga/vim-ultest",
 			cmd = { "UltestSummary", "ultest" },
 			requires = { "vim-test/vim-test" },
 			run = ":UpdateRemoteuseins",
-			opt = true,
 		})
 
 		use({ "romainl/vim-cool" })
-		use({ "psliwka/vim-smoothie", opt = true })
+		use({ "psliwka/vim-smoothie" })
 		use({ "wakatime/vim-wakatime" })
-		use({ "voldikss/vim-translator", cmd = { "TranslateW" }, opt = true })
+		use({ "voldikss/vim-translator", cmd = { "TranslateW" } })
 		-- terminal
 		use({ "voldikss/vim-floaterm" })
 		use({ "akinsho/toggleterm.nvim", tag = "v1.*" })

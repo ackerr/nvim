@@ -1,3 +1,4 @@
+local vim = vim
 -- telescope
 local telescope = require("telescope")
 local actions = require("telescope.actions")
@@ -42,7 +43,7 @@ telescope.setup({
 
 Keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
 Keymap("n", "<leader>fr", "<cmd>Telescope live_grep<CR>")
-Keymap("x", "<leader>fr", 'y:Telescope live_grep<CR><c-r>"')
+Keymap("v", "<leader>fr", "y:Telescope live_grep default_text=<c-r>0<CR>")
 Keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>")
 Keymap("n", "<leader>fg", "<cmd>Telescope git_status<CR>")
 Keymap("n", "<leader>rr", "<cmd>Telescope oldfiles<CR>")
