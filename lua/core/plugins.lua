@@ -69,16 +69,6 @@ packer.startup({
 		})
 		use({ "andrewstuart/vim-kubernetes", ft = { "yaml", "yml" } })
 		use({ "cespare/vim-toml", ft = "toml" })
-		use({
-			"vim-test/vim-test",
-			cmd = { "TestNearest", "TestSuite", "TestVisit", "TestFile", "TestLast" },
-		})
-		use({
-			"rcarriga/vim-ultest",
-			cmd = { "UltestSummary", "ultest" },
-			requires = { "vim-test/vim-test" },
-			run = ":UpdateRemoteuseins",
-		})
 
 		use({ "romainl/vim-cool" })
 		use({ "psliwka/vim-smoothie" })
