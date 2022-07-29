@@ -83,8 +83,11 @@ packer.startup({
 		use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
 		use("nvim-lualine/lualine.nvim")
 		-- lsp
-		use("neovim/nvim-lspconfig")
-		use("williamboman/nvim-lsp-installer")
+		use({
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+			"neovim/nvim-lspconfig",
+		})
 
 		use("hrsh7th/nvim-cmp")
 		use("hrsh7th/cmp-nvim-lsp")

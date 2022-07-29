@@ -45,16 +45,10 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 -- lsp installer
 
 local servers = { "gopls", "rust_analyzer", "sumneko_lua", "pyright", "vimls", "jsonls", "tsserver" }
-require("nvim-lsp-installer").setup({
+require("mason").setup({})
+require("mason-lspconfig").setup({
 	ensure_installed = servers,
 	automatic_installation = true,
-	ui = {
-		icons = {
-			server_installed = "✓",
-			server_pending = "➜",
-			server_uninstalled = "✗",
-		},
-	},
 })
 
 -- lsp config
