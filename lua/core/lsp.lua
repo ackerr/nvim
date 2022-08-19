@@ -32,7 +32,12 @@ end
 
 -- lsp callback
 local on_attach = function(client, bufnr)
-	if client.name == "gopls" or client.name == "rust_analyzer" or client.name == "sumneko_lua" then
+	if
+		client.name == "gopls"
+		or client.name == "rust_analyzer"
+		or client.name == "sumneko_lua"
+		or client.name == "jsonls"
+	then
 		client.resolved_capabilities.document_formatting = false
 	end
 

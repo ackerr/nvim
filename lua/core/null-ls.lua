@@ -7,6 +7,7 @@ require("null-ls").setup({
 		formatting.stylua,
 		formatting.goimports,
 		formatting.rustfmt,
+		formatting.fixjson,
 		formatting.black.with({ extra_args = { "--line-length", "120" } }),
 
 		diagnostics.flake8.with({ extra_args = { "--max-line-length", "120" } }),
@@ -14,4 +15,4 @@ require("null-ls").setup({
 	},
 })
 vim.cmd([[ command! Formatting exec 'lua vim.lsp.buf.formatting()' ]])
-vim.api.nvim_exec([[ autocmd BufWritePost *.py,*.go,*.lua,*.rs Formatting ]], true)
+vim.api.nvim_exec([[ autocmd BufWritePost *.py,*.go,*.lua,*.rs,*.json Formatting ]], true)
