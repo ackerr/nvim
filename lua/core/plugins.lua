@@ -138,8 +138,8 @@ vim.cmd([[
 ]])
 
 -- comment.nvim
-Keymap("n", "<C-_>", "gcc", { noremap = false })
-Keymap("v", "<C-_>", "gc", { noremap = false })
+Keymap("n", "<C-/>", "gcc", { noremap = false })
+Keymap("v", "<C-/>", "gc", { noremap = false })
 
 -- vim-easy-align
 Keymap("x", "ga", ":EasyAlign<CR>")
