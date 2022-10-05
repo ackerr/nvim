@@ -14,5 +14,5 @@ require("null-ls").setup({
 		-- diagnostics.golangci_lint,
 	},
 })
-vim.cmd([[ command! Formatting exec 'lua vim.lsp.buf.formatting()' ]])
+vim.cmd([[ command! Formatting exec 'lua vim.lsp.buf.format()' ]])
 vim.api.nvim_exec([[ autocmd BufWritePost *.py,*.go,*.lua,*.rs,*.json Formatting ]], true)
