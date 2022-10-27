@@ -76,7 +76,7 @@ packer.startup({
 		use({ "voldikss/vim-translator", cmd = { "TranslateW" } })
 		-- terminal
 		use({ "voldikss/vim-floaterm" })
-		use({ "akinsho/toggleterm.nvim", tag = "v1.*" })
+		use({ "akinsho/toggleterm.nvim", tag = "*" })
 
 		use({ "kyazdani42/nvim-tree.lua" })
 
