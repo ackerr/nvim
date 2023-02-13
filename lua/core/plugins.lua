@@ -59,7 +59,6 @@ packer.startup({
 			end,
 		})
 
-		use({ "github/copilot.vim" })
 		use({
 			"lewis6991/gitsigns.nvim",
 			event = "BufRead",
@@ -67,12 +66,10 @@ packer.startup({
 				require("core.gitsigns")
 			end,
 		})
-		use({ "andrewstuart/vim-kubernetes", ft = { "yaml", "yml" } })
-		use({ "cespare/vim-toml", ft = "toml" })
 
 		use({ "romainl/vim-cool" })
 		use({ "psliwka/vim-smoothie" })
-		use({ "wakatime/vim-wakatime" })
+		-- use({ "wakatime/vim-wakatime" })
 		use({ "voldikss/vim-translator", cmd = { "TranslateW" } })
 		-- terminal
 		use({ "voldikss/vim-floaterm" })
@@ -164,19 +161,6 @@ vim.g.easy_align_delimiters = {
 Keymap("n", "<M-t>", ":TranslateW<CR>")
 Keymap("v", "<M-t>", ":TranslateW<CR>")
 
--- vim-test and vim-ultest
-Keymap("n", "tn", ":TestNearest<CR>")
-Keymap("n", "tf", ":TestFile<CR>")
-Keymap("n", "ts", ":TestSuite<CR>")
-Keymap("n", "tl", ":TestLast<CR>")
-Keymap("n", "tg", ":TestVisit<CR>")
-Keymap("n", "tt", ":UltestSummary<CR>")
-
-vim.g["test#strategy"] = "floaterm"
-vim.g["test#python#runner"] = "pytest"
-vim.g["test#go#runner"] = "gotest"
-vim.g["ultest_use_pty"] = 1
-
 -- github copilot
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
@@ -199,3 +183,5 @@ vim.cmd([[
         au User visual_multi_exit lua require('vmlens').exit()
     aug END
 ]])
+
+vim.api.nvim_command("filetype plugin indent on")

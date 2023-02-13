@@ -14,7 +14,6 @@ require("nvim-tree").setup({
 		dotfiles = false,
 		custom = { ".git", "node_modules", ".cache", ".DS_Store", "__pycache__", ".idea", ".dist" },
 	},
-	ignore_ft_on_setup = { "alpha" },
 	respect_buf_cwd = true,
 	renderer = {
 		icons = {

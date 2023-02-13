@@ -22,7 +22,6 @@ opt.number = true
 opt.numberwidth = 2
 opt.relativenumber = false
 opt.autoindent = true
-opt.cindent = true
 opt.smartcase = true
 opt.smartindent = true
 opt.shiftwidth = 4

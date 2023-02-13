@@ -36,7 +36,7 @@ local on_attach = function(client, bufnr)
 	if
 		client.name == "gopls"
 		or client.name == "rust_analyzer"
-		or client.name == "sumneko_lua"
+		or client.name == "lua_ls"
 		or client.name == "jsonls"
 	then
 		client.server_capabilities.document_formatting = false
@@ -50,7 +50,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 -- lsp installer
 
-local servers = { "gopls", "rust_analyzer", "sumneko_lua", "pyright", "vimls", "jsonls", "tsserver" }
+local servers = { "gopls", "rust_analyzer", "lua_ls", "pyright", "vimls", "jsonls", "tsserver" }
 require("mason").setup({})
 require("mason-lspconfig").setup({
 	ensure_installed = servers,
