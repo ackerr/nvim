@@ -1,133 +1,108 @@
 local vim = vim
 local fn = vim.fn
 
--- Automatically install packer
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-local packer_bootstarp
-if fn.empty(fn.glob(install_path)) > 0 then
-	packer_bootstarp = fn.system({
+-- Automatically install lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
 		"git",
 		"clone",
-		"--depth",
-		"1",
-		"https://github.com/wbthomason/packer.nvim",
-		install_path,
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
 	})
-	print("Installing packer close and reopen Neovim...")
-	vim.cmd([[packadd packer.nvim]])
 end
-
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-	return
-end
+vim.opt.rtp:prepend(lazypath)
 
 -- Plugin
-packer.startup({
-	function(use)
-		use("wbthomason/packer.nvim")
-		use("nvim-lua/popup.nvim")
-		use("nvim-lua/plenary.nvim")
-		use("kyazdani42/nvim-web-devicons")
-		-- colorscheme
-		use({
-			"rebelot/kanagawa.nvim",
-			config = function()
-				require("kanagawa").setup()
-			end,
-		})
-		use({ "goolord/alpha-nvim", requires = { "nvim-telescope/telescope.nvim" } })
-		use({ "kevinhwang91/nvim-hlslens" })
-		use({ "tpope/vim-surround" })
-		use({ "tpope/vim-repeat" })
-		use({
-			"numToStr/Comment.nvim",
-			config = function()
-				require("Comment").setup()
-			end,
-		})
-		use({ "itchyny/vim-cursorword" })
-		use({ "junegunn/vim-easy-align" })
-		use({ "editorconfig/editorconfig-vim" })
-		use({ "terryma/vim-multiple-cursors" })
-		use({ "mg979/vim-visual-multi" })
-		use({ "Vimjas/vim-python-pep8-indent", ft = "python" })
-		use({
-			"norcalli/nvim-colorizer.lua",
-			config = function()
-				require("colorizer").setup({ "*" })
-			end,
-		})
-
-		use({
-			"lewis6991/gitsigns.nvim",
-			event = "BufRead",
-			config = function()
-				require("core.gitsigns")
-			end,
-		})
-
-		use({ "romainl/vim-cool" })
-		use({ "psliwka/vim-smoothie" })
-		-- use({ "wakatime/vim-wakatime" })
-		use({ "voldikss/vim-translator", cmd = { "TranslateW" } })
-		-- terminal
-		use({ "voldikss/vim-floaterm" })
-		use({ "akinsho/toggleterm.nvim", tag = "*" })
-
-		use({ "kyazdani42/nvim-tree.lua" })
-
-		use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
-		use("nvim-lualine/lualine.nvim")
-		-- lsp
-		use({
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-			"neovim/nvim-lspconfig",
-		})
-
-		use("hrsh7th/nvim-cmp")
-		use("hrsh7th/cmp-nvim-lsp")
-		use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
-		use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
-		use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" })
-		use("windwp/nvim-autopairs")
-		-- lsp icon
-		use("onsails/lspkind-nvim")
-		-- snippet.
-		use("rafamadriz/friendly-snippets")
-		use("L3MON4D3/LuaSnip")
-		use({ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" })
-		-- lsp format
-		use({
-			"jose-elias-alvarez/null-ls.nvim",
-			event = "BufRead",
-			config = function()
-				require("core.null-ls")
-			end,
-		})
-		-- syntax
-		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-		use({ "nvim-treesitter/nvim-treesitter-textobjects", requires = { "nvim-treesitter/nvim-treesitter" } })
-		use({ "romgrk/nvim-treesitter-context", requires = { "nvim-treesitter/nvim-treesitter" } })
-
-		-- search
-		use("nvim-telescope/telescope.nvim")
-		use("nvim-telescope/telescope-project.nvim")
-	end,
-
-	config = {
-		display = {
-			open_fn = function()
-				return require("packer.util").float({ border = "rounded" })
-			end,
-		},
+require("lazy").setup({
+	{ "nvim-lua/popup.nvim" },
+	{ "nvim-lua/plenary.nvim" },
+	{ "kyazdani42/nvim-web-devicons" }, -- colorscheme
+	{
+		"rebelot/kanagawa.nvim",
+		config = function()
+			require("kanagawa").setup()
+		end,
 	},
+	{ "goolord/alpha-nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
+	{ "kevinhwang91/nvim-hlslens" },
+	{ "tpope/vim-surround" },
+	{ "tpope/vim-repeat" },
+	{
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
+	},
+	{ "itchyny/vim-cursorword" },
+	{ "junegunn/vim-easy-align" },
+	{ "editorconfig/editorconfig-vim" },
+	{ "terryma/vim-multiple-cursors" },
+	{ "mg979/vim-visual-multi" },
+	{ "Vimjas/vim-python-pep8-indent", ft = "python" },
+	{
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup({ "*" })
+		end,
+	},
+	{
+		"lewis6991/gitsigns.nvim",
+		event = "BufRead",
+		config = function()
+			require("core.gitsigns")
+		end,
+	},
+	{ "romainl/vim-cool" },
+	{ "psliwka/vim-smoothie" },
+	{ "voldikss/vim-translator", cmd = { "TranslateW" } },
+	{ "akinsho/toggleterm.nvim", version = "*" },
+	{ "kyazdani42/nvim-tree.lua" },
+	{ "akinsho/bufferline.nvim", version = "v2.*", dependencies = "kyazdani42/nvim-web-devicons" },
+	{ "nvim-lualine/lualine.nvim" }, -- lsp
+	{ "williamboman/mason.nvim" },
+	{ "williamboman/mason-lspconfig.nvim" },
+	{ "neovim/nvim-lspconfig" },
+	{ "hrsh7th/nvim-cmp" },
+	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "hrsh7th/cmp-buffer", dependencies = "hrsh7th/nvim-cmp" },
+	{ "hrsh7th/cmp-path", dependencies = "hrsh7th/nvim-cmp" },
+	{ "hrsh7th/cmp-cmdline", dependencies = "hrsh7th/nvim-cmp" },
+	{ "windwp/nvim-autopairs" },
+	{ "onsails/lspkind-nvim" },
+	{ "rafamadriz/friendly-snippets" },
+	{ "L3MON4D3/LuaSnip" },
+	{ "saadparwaiz1/cmp_luasnip", dependencies = "hrsh7th/nvim-cmp" },
+	{
+		"jose-elias-alvarez/null-ls.nvim",
+		event = "BufRead",
+		config = function()
+			require("core.null-ls")
+		end,
+	},
+	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+	{ "nvim-treesitter/nvim-treesitter-textobjects", dependencies = { "nvim-treesitter/nvim-treesitter" } },
+	{ "romgrk/nvim-treesitter-context", dependencies = { "nvim-treesitter/nvim-treesitter" } },
+	{ "nvim-telescope/telescope.nvim" },
+	{ "nvim-telescope/telescope-project.nvim" },
+	-- ui = {
+	-- 	icons = {
+	-- 		config = "🛠",
+	-- 		event = "📅",
+	-- 		ft = "📂",
+	-- 		init = " ",
+	-- 		keys = " ",
+	-- 		plugin = " ",
+	-- 		runtime = "💻",
+	-- 		source = " ",
+	-- 		start = "🚀",
+	-- 		task = "✔ ",
+	-- 		lazy = "💤 ",
+	-- 	},
+	-- },
 })
-
-if packer_bootstarp then
-	require("packer").sync()
-end
 
 vim.cmd([[
   silent! colorscheme kanagawa
