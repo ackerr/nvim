@@ -20,12 +20,7 @@ require("lazy").setup({
 	{ "nvim-lua/popup.nvim" },
 	{ "nvim-lua/plenary.nvim" },
 	{ "kyazdani42/nvim-web-devicons" }, -- colorscheme
-	{
-		"rebelot/kanagawa.nvim",
-		config = function()
-			require("kanagawa").setup()
-		end,
-	},
+	{ "rebelot/kanagawa.nvim" },
 	{ "goolord/alpha-nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
 	{ "kevinhwang91/nvim-hlslens" },
 	{ "tpope/vim-surround" },
