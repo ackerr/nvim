@@ -19,24 +19,47 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	{ "nvim-lua/popup.nvim" },
 	{ "nvim-lua/plenary.nvim" },
-	{ "kyazdani42/nvim-web-devicons" }, -- colorscheme
-	{ "rebelot/kanagawa.nvim" },
-	{ "goolord/alpha-nvim", dependencies = { "nvim-telescope/telescope.nvim" } },
-	{ "kevinhwang91/nvim-hlslens" },
-	{ "tpope/vim-surround" },
-	{ "tpope/vim-repeat" },
+	{ "kyazdani42/nvim-web-devicons", lazy = true },
+	{
+		"rebelot/kanagawa.nvim",
+		config = function()
+			vim.cmd([[
+  silent! colorscheme kanagawa
+  highlight VertSplit guibg=NONE
+]])
+		end,
+	},
+	{ "goolord/alpha-nvim" },
+	{ "kevinhwang91/nvim-hlslens", lazy = true },
+	{ "tpope/vim-repeat", lazy = true },
+	{
+		"kylechui/nvim-surround",
+		event = { "BufReadPost", "BufNewFile" },
+		config = true,
+		lazy = true,
+	},
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		opts = {
+			disable_filetype = { "TelescopePrompt", "vim" },
+			check_ts = true,
+		},
+		lazy = true,
+	},
 	{
 		"numToStr/Comment.nvim",
 		config = function()
 			require("Comment").setup()
 		end,
+		lazy = true,
 	},
 	{ "itchyny/vim-cursorword" },
-	{ "junegunn/vim-easy-align" },
+	{ "junegunn/vim-easy-align", lazy = true },
 	{ "editorconfig/editorconfig-vim" },
-	{ "terryma/vim-multiple-cursors" },
-	{ "mg979/vim-visual-multi" },
-	{ "Vimjas/vim-python-pep8-indent", ft = "python" },
+	{ "terryma/vim-multiple-cursors", lazy = true },
+	{ "mg979/vim-visual-multi", lazy = true },
+	{ "Vimjas/vim-python-pep8-indent", ft = "python", lazy = true },
 	{
 		"norcalli/nvim-colorizer.lua",
 		config = function()
@@ -49,60 +72,67 @@ require("lazy").setup({
 		config = function()
 			require("core.gitsigns")
 		end,
+		lazy = true,
 	},
 	{ "romainl/vim-cool" },
 	{ "psliwka/vim-smoothie" },
-	{ "voldikss/vim-translator", cmd = { "TranslateW" } },
-	{ "akinsho/toggleterm.nvim", version = "*" },
+	{ "voldikss/vim-translator", cmd = { "TranslateW" }, lazy = true },
+	{ "akinsho/toggleterm.nvim", version = "*", lazy = true },
 	{ "kyazdani42/nvim-tree.lua" },
 	{ "akinsho/bufferline.nvim", version = "v2.*", dependencies = "kyazdani42/nvim-web-devicons" },
 	{ "nvim-lualine/lualine.nvim" }, -- lsp
 	{ "williamboman/mason.nvim" },
 	{ "williamboman/mason-lspconfig.nvim" },
 	{ "neovim/nvim-lspconfig" },
-	{ "hrsh7th/nvim-cmp" },
-	{ "hrsh7th/cmp-nvim-lsp" },
-	{ "hrsh7th/cmp-buffer", dependencies = "hrsh7th/nvim-cmp" },
-	{ "hrsh7th/cmp-path", dependencies = "hrsh7th/nvim-cmp" },
-	{ "hrsh7th/cmp-cmdline", dependencies = "hrsh7th/nvim-cmp" },
-	{ "windwp/nvim-autopairs" },
-	{ "onsails/lspkind-nvim" },
-	{ "rafamadriz/friendly-snippets" },
-	{ "L3MON4D3/LuaSnip" },
-	{ "saadparwaiz1/cmp_luasnip", dependencies = "hrsh7th/nvim-cmp" },
+	{
+		"hrsh7th/nvim-cmp",
+		event = { "InsertEnter", "CmdlineEnter" },
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"saadparwaiz1/cmp_luasnip",
+			"onsails/lspkind-nvim",
+		},
+		lazy = true,
+	},
+	{
+		"L3MON4D3/LuaSnip",
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			config = function()
+				vim.schedule(function()
+					require("luasnip.loaders.from_vscode").lazy_load()
+				end)
+			end,
+		},
+		opts = {
+			history = true,
+			delete_check_events = "TextChanged",
+		},
+		lazy = true,
+	},
 	{
 		"jose-elias-alvarez/null-ls.nvim",
 		event = "BufRead",
 		config = function()
 			require("core.null-ls")
 		end,
+		lazy = true,
 	},
-	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-	{ "nvim-treesitter/nvim-treesitter-textobjects", dependencies = { "nvim-treesitter/nvim-treesitter" } },
-	{ "romgrk/nvim-treesitter-context", dependencies = { "nvim-treesitter/nvim-treesitter" } },
-	{ "nvim-telescope/telescope.nvim" },
-	{ "nvim-telescope/telescope-project.nvim" },
-	-- ui = {
-	-- 	icons = {
-	-- 		config = "🛠",
-	-- 		event = "📅",
-	-- 		ft = "📂",
-	-- 		init = " ",
-	-- 		keys = " ",
-	-- 		plugin = " ",
-	-- 		runtime = "💻",
-	-- 		source = " ",
-	-- 		start = "🚀",
-	-- 		task = "✔ ",
-	-- 		lazy = "💤 ",
-	-- 	},
-	-- },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		event = { "BufReadPre", "BufNewFile" },
+		build = ":TSUpdate",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"nvim-treesitter/nvim-treesitter-context",
+		},
+		lazy = true,
+	},
+	{ "nvim-telescope/telescope.nvim", lazy = true },
 })
-
-vim.cmd([[
-  silent! colorscheme kanagawa
-  highlight VertSplit guibg=NONE
-]])
 
 -- comment.nvim
 Keymap("n", "<C-/>", "gcc", { noremap = false })
@@ -130,11 +160,6 @@ vim.g.easy_align_delimiters = {
 -- vim-translator
 Keymap("n", "<M-t>", ":TranslateW<CR>")
 Keymap("v", "<M-t>", ":TranslateW<CR>")
-
--- github copilot
-vim.g.copilot_no_tab_map = true
-vim.g.copilot_assume_mapped = true
-vim.g.copilot_tab_fallback = ""
 
 -- hlslens
 require("hlslens").setup({

@@ -5,8 +5,8 @@ local cmp = require("cmp")
 local lspkind = require("lspkind")
 local luasnip = require("luasnip")
 
-require("luasnip.loaders.from_vscode").lazy_load()
 cmp.setup({
+	preselect = cmp.PreselectMode.None,
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
 		format = lspkind.cmp_format({
@@ -23,8 +23,8 @@ cmp.setup({
 			end,
 		}),
 	},
-	mapping = {
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
+	mapping = cmp.mapping.preset.insert({
+		["<CR>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }),
 		["<C-p>"] = cmp.mapping.select_prev_item(),
 		["<C-n>"] = cmp.mapping.select_next_item(),
 		["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -53,7 +53,7 @@ cmp.setup({
 				fallback()
 			end
 		end, { "i", "s" }),
-	},
+	}),
 	snippet = {
 		expand = function(args)
 			require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
@@ -62,12 +62,22 @@ cmp.setup({
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
-		{ name = "buffer" },
+		{
+			name = "buffer",
+			option = {
+				get_bufnrs = function()
+					return vim.api.nvim_list_bufs()
+				end,
+			},
+		},
 		{ name = "path" },
 	},
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
 		select = false,
+	},
+	completion = {
+		keyword_length = 1,
 	},
 	window = {
 		documentation = {

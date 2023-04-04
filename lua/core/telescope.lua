@@ -34,6 +34,13 @@ telescope.setup({
 		},
 	},
 	pickers = {
+		grep_string = {
+			only_sort_text = true,
+		},
+		live_grep = {
+			--@usage don't include the filename in the search results
+			only_sort_text = true,
+		},
 		find_files = {
 			hidden = true,
 			find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }, -- remove prefix ./
@@ -49,7 +56,3 @@ Keymap("n", "<leader>fg", "<cmd>Telescope git_status<CR>")
 Keymap("n", "<leader>rr", "<cmd>Telescope oldfiles<CR>")
 Keymap("n", "gr", "<cmd>Telescope lsp_references theme=dropdown<CR>")
 Keymap("n", "<M-CR>", "<cmd>Telescope lsp_code_actions theme=dropdown<CR><ESC>") -- alt+enter
-
--- telescope-project
-telescope.load_extension("project")
-Keymap("n", "<leader>p", ":lua require'telescope'.extensions.project.project{ display_type = 'full' }<CR>")
