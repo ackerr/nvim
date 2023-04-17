@@ -52,7 +52,6 @@ require("lazy").setup({
 		config = function()
 			require("Comment").setup()
 		end,
-		lazy = true,
 	},
 	{ "itchyny/vim-cursorword" },
 	{ "junegunn/vim-easy-align", lazy = true },
@@ -95,7 +94,7 @@ require("lazy").setup({
 			"saadparwaiz1/cmp_luasnip",
 			"onsails/lspkind-nvim",
 		},
-		lazy = true,
+    lazy = true,
 	},
 	{
 		"L3MON4D3/LuaSnip",

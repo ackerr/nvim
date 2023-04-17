@@ -15,11 +15,6 @@ dashboard.section.buttons.val = {
 	dashboard.button("f", "  > Find file", ":Telescope find_files<CR>"),
 	dashboard.button("w", "  > Find word", ":Telescope live_grep<CR>"),
 	dashboard.button("g", "  > Find edit file", ":Telescope git_status<CR>"),
-	dashboard.button(
-		"p",
-		"  > Find project",
-		":lua require'telescope'.extensions.project.project{ display_type = 'full' }<CR>"
-	),
 	dashboard.button("r", "  > Find recent", ":Telescope oldfiles<CR>"),
 	dashboard.button("s", "  > Settings", ":e $MYVIMRC<CR>"),
 	dashboard.button("q", "  > Quit", ":qa<CR>"),

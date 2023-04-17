@@ -38,12 +38,13 @@ cmp.setup({
 			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
 			else
-				local copilot_keys = vim.fn["copilot#Accept"]()
-				if copilot_keys ~= "" then
-					vim.api.nvim_feedkeys(copilot_keys, "i", true)
-				else
-					fallback()
-				end
+				fallback()
+				-- local copilot_keys = vim.fn["copilot#Accept"]()
+				-- if copilot_keys ~= "" then
+				-- 	vim.api.nvim_feedkeys(copilot_keys, "i", true)
+				-- else
+				-- 	fallback()
+				-- end
 			end
 		end, { "i", "s" }),
 		["<S-Tab>"] = cmp.mapping(function(fallback)

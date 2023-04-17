@@ -70,7 +70,34 @@ for _, server in ipairs(servers) do
 	})
 end
 
+lspconfig.gopls.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	flags = {
+		debounce_text_changes = 150,
+	},
+	settings = {
+		gopls = {
+			usePlaceholders = true,
+			hints = {
+				assignVariableTypes = true,
+				compositeLiteralFields = true,
+				compositeLiteralTypes = true,
+				constantValues = true,
+				functionTypeParameters = true,
+				parameterNames = true,
+				rangeVariableTypes = true,
+			},
+		},
+	},
+})
+
 lspconfig.pyright.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	flags = {
+		debounce_text_changes = 150,
+	},
 	settings = {
 		python = {
 			analysis = {
