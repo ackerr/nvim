@@ -94,7 +94,7 @@ require("lazy").setup({
 			"saadparwaiz1/cmp_luasnip",
 			"onsails/lspkind-nvim",
 		},
-    lazy = true,
+		lazy = true,
 	},
 	{
 		"L3MON4D3/LuaSnip",

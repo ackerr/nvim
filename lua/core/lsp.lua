@@ -43,6 +43,7 @@ local on_attach = function(client, bufnr)
 	end
 
 	lsp_keymap(bufnr)
+	client.server_capabilities.document_highlight = true
 	lsp_document_highlight(client)
 end
 
