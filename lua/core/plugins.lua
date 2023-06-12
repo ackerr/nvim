@@ -78,7 +78,7 @@ require("lazy").setup({
 	{ "voldikss/vim-translator", cmd = { "TranslateW" }, lazy = true },
 	{ "akinsho/toggleterm.nvim", version = "*", lazy = true },
 	{ "kyazdani42/nvim-tree.lua" },
-	{ "akinsho/bufferline.nvim", version = "v2.*", dependencies = "kyazdani42/nvim-web-devicons" },
+	{ "akinsho/bufferline.nvim", version = "v4.*", dependencies = "kyazdani42/nvim-web-devicons" },
 	{ "nvim-lualine/lualine.nvim" }, -- lsp
 	{ "williamboman/mason.nvim" },
 	{ "williamboman/mason-lspconfig.nvim" },
@@ -95,6 +95,14 @@ require("lazy").setup({
 			"onsails/lspkind-nvim",
 		},
 		lazy = true,
+	},
+	{
+		"lvimuser/lsp-inlayhints.nvim",
+    branch = "anticonceal",
+		event = { "LspAttach" },
+		config = function()
+			require("lsp-inlayhints").setup()
+		end,
 	},
 	{
 		"L3MON4D3/LuaSnip",
