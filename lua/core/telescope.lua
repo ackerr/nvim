@@ -4,48 +4,51 @@ local telescope = require("telescope")
 local actions = require("telescope.actions")
 local action_layout = require("telescope.actions.layout")
 telescope.setup({
-	defaults = {
-		layout_config = {
-			horizontal = {
-				preview_width = 0.55,
-			},
-			center = {
-				height = 0.6,
-				width = 0.6,
-			},
-		},
-		mappings = {
-			i = {
-				["<esc>"] = actions.close,
-				["<C-u"] = false,
-				["<M-p>"] = action_layout.toggle_preview,
-			},
-			n = {
-				["<M-p>"] = action_layout.toggle_preview,
-			},
-		},
-		color_devicons = true,
-		file_ignore_patterns = {
-			".git",
-			"node_modules",
-			".DS_Store",
-			"__pycache__",
-			".idea",
-		},
-	},
-	pickers = {
-		grep_string = {
-			only_sort_text = true,
-		},
-		live_grep = {
-			--@usage don't include the filename in the search results
-			only_sort_text = true,
-		},
-		find_files = {
-			hidden = true,
-			find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }, -- remove prefix ./
-		},
-	},
+  defaults = {
+    layout_config = {
+      horizontal = {
+        preview_width = 0.55,
+      },
+      center = {
+        height = 0.6,
+        width = 0.6,
+      },
+    },
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close,
+        ["<C-u"] = false,
+        ["<M-p>"] = action_layout.toggle_preview,
+      },
+      n = {
+        ["<M-p>"] = action_layout.toggle_preview,
+      },
+    },
+    color_devicons = true,
+    file_ignore_patterns = {
+      ".git",
+      "node_modules",
+      ".DS_Store",
+      "__pycache__",
+      ".idea",
+      "biz/model",
+      "kitex_gen",
+      "go.sum",
+    },
+  },
+  pickers = {
+    grep_string = {
+      only_sort_text = true,
+    },
+    live_grep = {
+      --@usage don't include the filename in the search results
+      only_sort_text = true,
+    },
+    find_files = {
+      hidden = true,
+      find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }, -- remove prefix ./
+    },
+  },
 })
 
 Keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
