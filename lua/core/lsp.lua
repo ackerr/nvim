@@ -33,12 +33,12 @@ end
 
 -- lsp callback
 local on_attach = function(client, bufnr)
-  if client.name == "gopls" or client.name == "rust_analyzer" or client.name == "lua_ls" or client.name == "jsonls" then
-    client.server_capabilities.document_formatting = false
-  end
 
   lsp_keymap(bufnr)
   client.server_capabilities.document_highlight = true
+  if client.name == "jsonls" then
+    client.server_capabilities.document_highlight = false
+  end
   lsp_document_highlight(client)
 end
 

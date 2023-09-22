@@ -122,10 +122,13 @@ require("lazy").setup({
     lazy = true,
   },
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimdev/guard.nvim",
+    dependencies = {
+      "nvimdev/guard-collection",
+    },
     event = "BufRead",
     config = function()
-      require("core.null-ls")
+      require("core.guard")
     end,
     lazy = true,
   },
