@@ -19,7 +19,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   { "nvim-lua/popup.nvim" },
   { "nvim-lua/plenary.nvim" },
-  { "kyazdani42/nvim-web-devicons", lazy = true },
+  { "nvim-tree/nvim-web-devicons", lazy = true },
   {
     "rebelot/kanagawa.nvim",
     config = function()
@@ -54,7 +54,7 @@ require("lazy").setup({
     end,
   },
   { "itchyny/vim-cursorword" },
-  { "junegunn/vim-easy-align", lazy = true },
+  { "junegunn/vim-easy-align" },
   { "editorconfig/editorconfig-vim" },
   { "terryma/vim-multiple-cursors", lazy = true },
   { "mg979/vim-visual-multi", lazy = true },
@@ -75,10 +75,38 @@ require("lazy").setup({
   },
   { "romainl/vim-cool" },
   { "psliwka/vim-smoothie" },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
+  },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- add any options here
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    },
+  },
   { "voldikss/vim-translator", cmd = { "TranslateW" }, lazy = true },
   { "akinsho/toggleterm.nvim", version = "*", lazy = true },
   { "kyazdani42/nvim-tree.lua" },
-  { "akinsho/bufferline.nvim", version = "v4.*", dependencies = "kyazdani42/nvim-web-devicons" },
+  { "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
   { "nvim-lualine/lualine.nvim" }, -- lsp
   { "williamboman/mason.nvim" },
   { "williamboman/mason-lspconfig.nvim" },
@@ -95,6 +123,20 @@ require("lazy").setup({
       "onsails/lspkind-nvim",
     },
     lazy = true,
+  },
+  {
+    "ray-x/go.nvim",
+    dependencies = {
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("go").setup()
+    end,
+    event = { "CmdlineEnter" },
+    ft = { "go", "gomod" },
+    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
   {
     "j-hui/fidget.nvim",
@@ -176,6 +218,26 @@ Keymap("v", "<M-t>", ":TranslateW<CR>")
 -- hlslens
 require("hlslens").setup({
   nearest_only = true,
+})
+
+-- notice.nvim
+require("noice").setup({
+  lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+    },
+  },
+  -- you can enable a preset for easier configuration
+  presets = {
+    bottom_search = true, -- use a classic bottom cmdline for search
+    command_palette = true, -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false, -- add a border to hover docs and signature help
+  },
 })
 
 Keymap("n", "n", [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]])
