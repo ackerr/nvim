@@ -1,24 +1,28 @@
 local vim = vim
 
 require("toggleterm").setup({
-	size = 25,
-	open_mapping = [[<M-=>]],
-	hide_numbers = true,
-	shade_filetypes = {},
-	shade_terminals = false,
-	shading_factor = 2,
-	start_in_insert = true,
-	insert_mappings = true,
-	persist_size = true,
-	close_on_exit = true,
-	float_opts = {
-		border = "curved",
-		winblend = 0,
-		highlights = {
-			border = "Normal",
-			background = "Normal",
-		},
-	},
+  size = 25,
+  open_mapping = [[<M-=>]],
+  hide_numbers = true,
+  shade_filetypes = {},
+  shade_terminals = false,
+  shading_factor = 2,
+  start_in_insert = true,
+  insert_mappings = true,
+  persist_size = true,
+  close_on_exit = true,
+  highlights = {
+    Normal = {
+      guibg = "#1F1F1F",
+    },
+  },
+  float_opts = {
+    border = "single",
+    winblend = 2,
+  },
+  on_create = function()
+    vim.cmd([[ setlocal signcolumn=no ]])
+  end,
 })
 
 Keymap("t", "<c-w><c-w>", "<c-\\><c-n><c-w>w")
@@ -26,9 +30,9 @@ Keymap("t", "<c-w><c-w>", "<c-\\><c-n><c-w>w")
 Keymap("v", "<leader>fs", ":ToggleTermSendVisualSelection<CR>")
 
 function _G.set_terminal_keymaps()
-	local opts = { noremap = true }
-	vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], opts)
-	-- vim.api.nvim_buf_set_keymap(0, "t", "<m-=>", [[<C-\><C-n>:ToggleTerm<CR>]], opts)
+  local opts = { noremap = true }
+  vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], opts)
+  -- vim.api.nvim_buf_set_keymap(0, "t", "<m-=>", [[<C-\><C-n>:ToggleTerm<CR>]], opts)
 end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
@@ -40,7 +44,7 @@ local Terminal = require("toggleterm.terminal").Terminal
 local lazygit = Terminal:new({ cmd = "lazygit", direction = "float" })
 
 function _LAZYGIT_TOGGLE()
-	lazygit:toggle()
+  lazygit:toggle()
 end
 
 vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { noremap = true, silent = true })
@@ -49,7 +53,7 @@ vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { n
 local python = Terminal:new({ cmd = "ipython", direction = "float" })
 
 function _PYTHON_TOGGLE()
-	python:toggle()
+  python:toggle()
 end
 
 vim.api.nvim_set_keymap("n", "<leader>py", "<cmd>lua _PYTHON_TOGGLE()<CR>", { noremap = true, silent = true })

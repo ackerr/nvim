@@ -9,7 +9,7 @@ local colors = {
   cyan = "#6A9589",
   red = "#C34043",
   violet = "#938aa9",
-  grey = "#727169",
+  grey = "#393850",
   green = "#76946A",
   yellow = "#C0A36E",
 }
@@ -17,7 +17,7 @@ local colors = {
 local kanagawa_theme = {
   normal = {
     a = { fg = colors.background, bg = colors.blue },
-    b = { fg = colors.foreground, bg = colors.background },
+    b = { fg = colors.blue, bg = colors.grey },
     c = { fg = colors.foreground, bg = colors.background },
   },
 
@@ -43,7 +43,7 @@ require("lualine").setup({
     lualine_a = {
       { "mode", separator = { left = "" }, right_padding = 2 },
     },
-    lualine_b = { "branch", "diff", "diagnostics" },
+    lualine_b = { "branch", "diff" },
     lualine_c = { "filename" },
     lualine_x = { "filetype" },
     lualine_y = { "progress" },

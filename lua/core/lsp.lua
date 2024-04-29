@@ -33,7 +33,6 @@ end
 
 -- lsp callback
 local on_attach = function(client, bufnr)
-
   lsp_keymap(bufnr)
   client.server_capabilities.document_highlight = true
   if client.name == "jsonls" then
@@ -100,6 +99,21 @@ lspconfig.pyright.setup({
         typeCheckingMode = "off",
         autoSearchPaths = true,
         useLibraryCodeForTypes = true,
+      },
+    },
+  },
+})
+
+lspconfig.lua_ls.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
       },
     },
   },

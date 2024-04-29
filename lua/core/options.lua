@@ -45,4 +45,7 @@ opt.showtabline = 0
 opt.background = "dark"
 opt.termguicolors = true
 
+opt.fillchars:append("vert:│")
+opt.fillchars:append("horiz:─")
+
 vim.api.nvim_create_autocmd({ "FileType" }, { command = "set formatoptions-=ro" })

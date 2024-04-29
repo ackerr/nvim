@@ -1,5 +1,4 @@
 local vim = vim
-local fn = vim.fn
 
 -- Automatically install lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -106,7 +105,11 @@ require("lazy").setup({
   { "voldikss/vim-translator", cmd = { "TranslateW" }, lazy = true },
   { "akinsho/toggleterm.nvim", version = "*", lazy = true },
   { "kyazdani42/nvim-tree.lua" },
-  { "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
+  {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    dependencies = "nvim-tree/nvim-web-devicons",
+  },
   { "nvim-lualine/lualine.nvim" }, -- lsp
   { "williamboman/mason.nvim" },
   { "williamboman/mason-lspconfig.nvim" },
@@ -149,6 +152,7 @@ require("lazy").setup({
   },
   {
     "L3MON4D3/LuaSnip",
+    run = "make install_jsregexp",
     dependencies = {
       "rafamadriz/friendly-snippets",
       config = function()
@@ -218,26 +222,6 @@ Keymap("v", "<M-t>", ":TranslateW<CR>")
 -- hlslens
 require("hlslens").setup({
   nearest_only = true,
-})
-
--- notice.nvim
-require("noice").setup({
-  lsp = {
-    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-    override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-    },
-  },
-  -- you can enable a preset for easier configuration
-  presets = {
-    bottom_search = true, -- use a classic bottom cmdline for search
-    command_palette = true, -- position the cmdline and popupmenu together
-    long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false, -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false, -- add a border to hover docs and signature help
-  },
 })
 
 Keymap("n", "n", [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]])

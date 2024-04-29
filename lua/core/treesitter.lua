@@ -1,9 +1,9 @@
 -- nvim-treesitter
 require("nvim-treesitter.configs").setup({
-  ensure_installed = { "go", "lua", "python", "vim", "rust" },
+  ensure_installed = { "go", "lua", "python", "rust", "markdown", "markdown_inline", "bash", "regex", "vim", "vimdoc" },
   highlight = {
     enable = true,
-    disable = {},
+    disable = { "txt" },
   },
   indent = {
     enable = true,
