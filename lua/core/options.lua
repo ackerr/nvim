@@ -49,3 +49,12 @@ opt.fillchars:append("vert:│")
 opt.fillchars:append("horiz:─")
 
 vim.api.nvim_create_autocmd({ "FileType" }, { command = "set formatoptions-=ro" })
+
+vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+  pattern = { "*" },
+  callback = function()
+    vim.highlight.on_yank({
+      timeout = 200,
+    })
+  end,
+})

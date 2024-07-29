@@ -21,6 +21,8 @@ require("lazy").setup({
   { "nvim-tree/nvim-web-devicons", lazy = true },
   {
     "rebelot/kanagawa.nvim",
+    lazy = false,
+    priority = 1000,
     config = function()
       vim.cmd([[
   silent! colorscheme kanagawa
@@ -30,7 +32,7 @@ require("lazy").setup({
   },
   { "goolord/alpha-nvim" },
   { "kevinhwang91/nvim-hlslens", lazy = true },
-  { "tpope/vim-repeat", lazy = true },
+  { "tpope/vim-repeat", event = { "InsertEnter" }, lazy = true },
   {
     "kylechui/nvim-surround",
     event = { "BufReadPost", "BufNewFile" },
@@ -51,18 +53,21 @@ require("lazy").setup({
     config = function()
       require("Comment").setup()
     end,
+    lazy = true,
   },
-  { "itchyny/vim-cursorword" },
-  { "junegunn/vim-easy-align" },
-  { "editorconfig/editorconfig-vim" },
+  { "itchyny/vim-cursorword", event = "BufRead", lazy = true },
+  { "junegunn/vim-easy-align", cmd = { "EasyAlign" }, lazy = true },
+  { "editorconfig/editorconfig-vim", event = "BufRead", lazy = true },
   { "terryma/vim-multiple-cursors", lazy = true },
   { "mg979/vim-visual-multi", lazy = true },
   { "Vimjas/vim-python-pep8-indent", ft = "python", lazy = true },
   {
     "norcalli/nvim-colorizer.lua",
+    event = "BufRead",
     config = function()
       require("colorizer").setup({ "*" })
     end,
+    lazy = true,
   },
   {
     "lewis6991/gitsigns.nvim",
@@ -72,8 +77,8 @@ require("lazy").setup({
     end,
     lazy = true,
   },
-  { "romainl/vim-cool" },
-  { "psliwka/vim-smoothie" },
+  { "romainl/vim-cool", event = "BufRead", lazy = true },
+  { "psliwka/vim-smoothie", event = "BufRead", lazy = true },
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -104,15 +109,15 @@ require("lazy").setup({
   },
   { "voldikss/vim-translator", cmd = { "TranslateW" }, lazy = true },
   { "akinsho/toggleterm.nvim", version = "*", lazy = true },
-  { "kyazdani42/nvim-tree.lua" },
+  { "kyazdani42/nvim-tree.lua", lazy = true },
   {
     "akinsho/bufferline.nvim",
     version = "*",
     dependencies = "nvim-tree/nvim-web-devicons",
   },
   { "nvim-lualine/lualine.nvim" }, -- lsp
-  { "williamboman/mason.nvim" },
-  { "williamboman/mason-lspconfig.nvim" },
+  { "williamboman/mason.nvim", cmd = { "Mason" }, lazy = true },
+  { "williamboman/mason-lspconfig.nvim", lazy = true },
   { "neovim/nvim-lspconfig" },
   {
     "hrsh7th/nvim-cmp",
@@ -140,6 +145,7 @@ require("lazy").setup({
     event = { "CmdlineEnter" },
     ft = { "go", "gomod" },
     build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
+    lazy = true,
   },
   {
     "j-hui/fidget.nvim",
@@ -150,6 +156,7 @@ require("lazy").setup({
     end,
     lazy = true,
   },
+  { "sindrets/diffview.nvim", event = "BufRead", lazy = true },
   {
     "L3MON4D3/LuaSnip",
     run = "make install_jsregexp",
