@@ -45,7 +45,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 -- lsp installer
 
-local servers = { "gopls", "rust_analyzer", "lua_ls", "pyright", "vimls", "jsonls", "tsserver" }
+local servers = { "gopls", "rust_analyzer", "lua_ls", "pyright", "vimls", "jsonls" }
 require("mason").setup({})
 require("mason-lspconfig").setup({
   ensure_installed = servers,

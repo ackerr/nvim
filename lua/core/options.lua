@@ -47,6 +47,7 @@ opt.termguicolors = true
 
 opt.fillchars:append("vert:│")
 opt.fillchars:append("horiz:─")
+opt.fillchars:append("fold:•")
 
 vim.api.nvim_create_autocmd({ "FileType" }, { command = "set formatoptions-=ro" })
 
