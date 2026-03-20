@@ -19,6 +19,10 @@ telescope.setup({
         ["<esc>"] = actions.close,
         ["<C-u"] = false,
         ["<M-p>"] = action_layout.toggle_preview,
+        ["<M-j>"] = actions.move_selection_next,
+        ["<M-k>"] = actions.move_selection_previous,
+        ["<C-d>"] = actions.preview_scrolling_down,
+        ["<C-u>"] = actions.preview_scrolling_up,
       },
       n = {
         ["<M-p>"] = action_layout.toggle_preview,
@@ -57,5 +61,4 @@ Keymap("v", "<leader>fr", "y:Telescope live_grep default_text=<c-r>0<CR>")
 Keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>")
 Keymap("n", "<leader>fg", "<cmd>Telescope git_status<CR>")
 Keymap("n", "<leader>rr", "<cmd>Telescope oldfiles<CR>")
-Keymap("n", "gr", "<cmd>Telescope lsp_references theme=dropdown<CR>")
 Keymap("n", "<M-CR>", "<cmd>Telescope lsp_code_actions theme=dropdown<CR><ESC>") -- alt+enter

@@ -1,3 +1,7 @@
+-- Disable netrw before anything else
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 require("core.options")
 require("core.keymaps")
 require("core.provider")
@@ -10,6 +14,6 @@ require("core.lualine")
 require("core.bufferline")
 require("core.noice")
 require("core.toggleterm")
-require("core.nvim-tree")
+-- nvim-tree config is now loaded in plugins.lua
 require("core.telescope")
 require("core.treesitter")

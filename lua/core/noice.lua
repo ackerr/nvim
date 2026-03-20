@@ -1,3 +1,8 @@
+-- nvim-notify
+require("notify").setup({
+  timeout = 2000,
+})
+
 -- notice.nvim
 require("noice").setup({
   lsp = {

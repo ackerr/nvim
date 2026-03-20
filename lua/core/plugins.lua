@@ -109,7 +109,13 @@ require("lazy").setup({
   },
   { "voldikss/vim-translator", cmd = { "TranslateW" }, lazy = true },
   { "akinsho/toggleterm.nvim", version = "*", lazy = true },
-  { "kyazdani42/nvim-tree.lua", lazy = true },
+  {
+    "kyazdani42/nvim-tree.lua",
+    lazy = false,
+    config = function()
+      require("core.nvim-tree")
+    end,
+  },
   {
     "akinsho/bufferline.nvim",
     version = "*",

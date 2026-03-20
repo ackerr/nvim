@@ -7,6 +7,8 @@ require("bufferline").setup({
       bg = "#1F1F28",
     },
     buffer_selected = {
+      fg = "#b8b4a8",
+      bg = "#2d2d3d",
       italic = false,
       bold = false,
     },
@@ -22,7 +24,7 @@ require("bufferline").setup({
     end,
     separator_style = "thin",
     indicator = {
-      style = "underline",
+      style = "none",
     },
   },
 })
