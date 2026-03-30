@@ -2,6 +2,8 @@ local vim = vim
 local opt = vim.opt
 
 vim.g.mapleader = " "
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
 
 opt.backup = false
 opt.writebackup = false
@@ -54,7 +56,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, { command = "set formatoptions-=ro" 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   pattern = { "*" },
   callback = function()
-    vim.highlight.on_yank({
+    vim.hl.on_yank({
       timeout = 200,
     })
   end,

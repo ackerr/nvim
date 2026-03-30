@@ -72,8 +72,8 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
--- lsp installer
 
+-- mason
 local servers = { "gopls", "rust_analyzer", "lua_ls", "pyright", "vimls", "jsonls", "ts_ls" }
 require("mason").setup({})
 require("mason-lspconfig").setup({
@@ -82,9 +82,7 @@ require("mason-lspconfig").setup({
   automatic_enable = false,
 })
 
--- lsp config
-local lspconfig = require("lspconfig")
-
+-- lsp config (Nvim 0.11+ native API)
 local server_settings = {
   gopls = {
     gopls = {
@@ -119,7 +117,7 @@ local server_settings = {
 }
 
 for _, server in ipairs(servers) do
-  lspconfig[server].setup({
+  vim.lsp.config(server, {
     capabilities = capabilities,
     on_attach = on_attach,
     flags = {
@@ -128,6 +126,8 @@ for _, server in ipairs(servers) do
     settings = server_settings[server] or {},
   })
 end
+
+vim.lsp.enable(servers)
 
 -- lsp diagnostic
 vim.diagnostic.config({
@@ -152,15 +152,3 @@ vim.diagnostic.config({
     prefix = "",
   },
 })
-
-
--- vim.api.nvim_create_autocmd({ "InsertEnter" }, {
---   callback = function()
---     vim.lsp.buf.inlay_hint(0, true)
---   end,
--- })
--- vim.api.nvim_create_autocmd({ "InsertLeave" }, {
---   callback = function()
---     vim.lsp.buf.inlay_hint(0, false)
---   end,
--- })

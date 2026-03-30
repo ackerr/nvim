@@ -3,8 +3,6 @@ local vim = vim
 -- nvim-cmp.
 local cmp = require("cmp")
 local lspkind = require("lspkind")
-local luasnip = require("luasnip")
-
 cmp.setup({
   preselect = cmp.PreselectMode.None,
   formatting = {
@@ -15,7 +13,6 @@ cmp.setup({
       before = function(entry, vim_item)
         vim_item.menu = ({
           nvim_lsp = "[LSP]",
-          luasnip = "[Snippet]",
           buffer = "[Buffer]",
           path = "[Path]",
         })[entry.source.name]
@@ -33,18 +30,8 @@ cmp.setup({
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expandable() then
-        luasnip.expand()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
       else
         fallback()
-        -- local copilot_keys = vim.fn["copilot#Accept"]()
-        -- if copilot_keys ~= "" then
-        -- 	vim.api.nvim_feedkeys(copilot_keys, "i", true)
-        -- else
-        -- 	fallback()
-        -- end
       end
     end, { "i", "s" }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
@@ -57,12 +44,11 @@ cmp.setup({
   }),
   snippet = {
     expand = function(args)
-      require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+      vim.snippet.expand(args.body)
     end,
   },
   sources = {
     { name = "nvim_lsp" },
-    { name = "luasnip" },
     {
       name = "buffer",
       option = {

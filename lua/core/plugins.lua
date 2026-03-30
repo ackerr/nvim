@@ -62,7 +62,7 @@ require("lazy").setup({
   { "mg979/vim-visual-multi", lazy = true },
   { "Vimjas/vim-python-pep8-indent", ft = "python", lazy = true },
   {
-    "norcalli/nvim-colorizer.lua",
+    "catgoose/nvim-colorizer.lua",
     event = "BufRead",
     config = function()
       require("colorizer").setup({ "*" })
@@ -133,7 +133,6 @@ require("lazy").setup({
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
-      "saadparwaiz1/cmp_luasnip",
       "onsails/lspkind-nvim",
     },
     lazy = true,
@@ -164,23 +163,6 @@ require("lazy").setup({
   },
   { "sindrets/diffview.nvim", event = "BufRead", lazy = true },
   {
-    "L3MON4D3/LuaSnip",
-    run = "make install_jsregexp",
-    dependencies = {
-      "rafamadriz/friendly-snippets",
-      config = function()
-        vim.schedule(function()
-          require("luasnip.loaders.from_vscode").lazy_load()
-        end)
-      end,
-    },
-    opts = {
-      history = true,
-      delete_check_events = "TextChanged",
-    },
-    lazy = true,
-  },
-  {
     "nvimdev/guard.nvim",
     dependencies = {
       "nvimdev/guard-collection",
@@ -197,12 +179,13 @@ require("lazy").setup({
     build = ":TSUpdate",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
-      "nvim-treesitter/nvim-treesitter-context",
     },
     lazy = true,
   },
   { "nvim-telescope/telescope.nvim", lazy = true },
   { "wakatime/vim-wakatime" },
+}, {
+  rocks = { enabled = false },
 })
 
 -- comment.nvim
